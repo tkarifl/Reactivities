@@ -44,7 +44,6 @@ export default observer(function ActivityForm() {
         navigate(`/activities/${activity.id}`)
       );
     }
-    activity.id ? updateActivity(activity) : createActivity(activity);
   }
 
   function handleInputChange(
