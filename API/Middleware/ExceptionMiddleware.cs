@@ -30,7 +30,6 @@ namespace API.Middleware
             catch (Exception ex)
             {
                 // the reason why we give content type,statuscode,jsonserializer is we are not in ApiController so we have to specify these ourselves.
-                // the reason is same
                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
