@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { Activity } from "../models/activity";
 import agent from "../api/agent";
+import { format } from "date-fns";
 import { v4 as uuid } from 'uuid';
 
 export default class ActivityStore {
@@ -14,13 +15,13 @@ export default class ActivityStore {
     }
 
     get activitiesByDate() {
-        return Array.from(this.activityMap.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+        return Array.from(this.activityMap.values()).sort((a, b) => a.date!.getTime() - b.date!.getTime());
     }
 
     get groupedActivities() {
         return Object.entries(
             this.activitiesByDate.reduce((activities, activity) => {
-                const date = activity.date;
+                const date = format(activity.date!, 'dd MMM yyyy');
                 activities[date] = activities[date] ? [...activities[date], activity] : [activity];
                 return activities;
             }, {} as { [key: string]: Activity[] })
@@ -66,7 +67,7 @@ export default class ActivityStore {
     }
 
     private setActivity = (activity: Activity) => {
-        activity.date = activity.date.split("T")[0];
+        activity.date = new Date(activity.date!);
         this.activityMap.set(activity.id, activity);
     }
 
@@ -79,6 +80,9 @@ export default class ActivityStore {
     }
 
     createActivity = async (activity: Activity) => {
+        //some issue happens with the activity.date, it should be in date format, but somehow it gets converted to string on it's way here
+        //when I convert the activity.date to date object again, the problem gets fixed
+        activity.date = new Date(activity.date!)
         this.loading = true;
         activity.id = uuid();
         try {
@@ -97,6 +101,7 @@ export default class ActivityStore {
         }
     }
     updateActivity = async (activity: Activity) => {
+        activity.date = new Date(activity.date!)
         this.loading = true;
         try {
             await agent.Activities.update(activity);
