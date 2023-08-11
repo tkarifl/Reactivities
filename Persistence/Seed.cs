@@ -9,7 +9,7 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, string userPass)
         {
             if (!userManager.Users.Any())
             {
@@ -22,8 +22,7 @@ namespace Persistence
 
                 foreach (var user in users)
                 {
-                    //we shouldn't create users like this, it's dangerous but this is just test app and not real world application
-                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.CreateAsync(user, userPass);
                     // we dont need to use savechangesasync function, because this method creates and saves the user to db at the same time
                 }
             }

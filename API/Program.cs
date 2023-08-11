@@ -41,7 +41,7 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     //when program runs, it will create db if it doesnt exist
     await context.Database.MigrateAsync();
-    await Seed.SeedData(context, userManager);
+    await Seed.SeedData(context, userManager, builder.Configuration["UserPass"]);
 }
 catch (Exception ex)
 {
