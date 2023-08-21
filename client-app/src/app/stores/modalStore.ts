@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx"
-import UserStore from "./userStore";
 
 interface Modal {
     open: boolean;
