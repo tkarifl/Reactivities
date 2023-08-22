@@ -15,8 +15,8 @@ namespace Persistence
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
 
-        // To set the new dbset activityattendee, this method has to be overridden
-        
+        // to config activityattendee pk and relations, this method has to be overridden
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
