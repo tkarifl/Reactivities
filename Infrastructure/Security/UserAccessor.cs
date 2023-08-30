@@ -11,7 +11,6 @@ namespace Infrastructure.Security
         public UserAccessor(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
-
         }
 
         // use httpcontextaccessor, so user object could be used to get the user claims
