@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace API.Dtos
@@ -20,6 +21,7 @@ namespace API.Dtos
         public string DisplayName { get; set; }
 
         [Required]
+        [JsonPropertyName("userName")]
         public string UserName { get; set; }
     }
 }
