@@ -14,9 +14,9 @@ namespace Persistence
         //added activityattendee dbset, so it can be directly queried from
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
+        public DbSet<Photo> Photos { get; set; }
 
         // to config activityattendee pk and relations, this method has to be overridden
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

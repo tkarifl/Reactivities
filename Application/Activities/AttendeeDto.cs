@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Domain;
+using Application.Profiles;
 
-namespace Application.Profiles
+namespace Application.Activities
 {
-    public class Profile
+    public class AttendeeDto
     {
         [JsonPropertyName("userName")]
         public string Username { get; set; }
@@ -15,6 +15,5 @@ namespace Application.Profiles
         public string Bio { get; set; }
         public string Image { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
     }
 }
